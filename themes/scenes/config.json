@@ -5,5 +5,8 @@
   "settings_key_panel": true,
   "settings_key_keycodes": [176, 83],
   "dock_glass": true,
-  "dock_even_padding": true
+  "dock_even_padding": true,
+  "weather": true,
+  "weather_animations": true,
+  "weather_unit": "c"
 }

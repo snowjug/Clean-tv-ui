@@ -184,6 +184,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private boolean lunar;
     private int lunarOffset;
     private TextView stats;
+    private View weatherBlock;
+    private TextView weatherText;
+    private WeatherEffectsView weatherEffects;
+    private WeatherManager weatherManager;
+    private boolean showWeather;
+    private boolean weatherAnimations;
     private List<RaceWeekend.Race> raceCalendar;
     private View racePanel;
     private TextView raceKicker, raceHeadline, raceSessions;
@@ -480,6 +486,23 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         raceHeadline = findViewById(R.id.raceHeadline);
         raceSessions = findViewById(R.id.raceSessions);
         showStats = cfg.showStats;
+        weatherBlock = findViewById(R.id.weatherBlock);
+        weatherText = findViewById(R.id.weatherText);
+        weatherEffects = findViewById(R.id.weatherEffects);
+        showWeather = cfg.weather;
+        weatherAnimations = cfg.weatherAnimations;
+        if (showWeather) {
+            weatherManager = new WeatherManager(this, (weatherInfo, effect) -> {
+                if (weatherText != null && weatherBlock != null) {
+                    weatherText.setText(weatherInfo);
+                    weatherBlock.setVisibility(View.VISIBLE);
+                }
+                if (weatherEffects != null && weatherAnimations) {
+                    weatherEffects.setEffect(effect);
+                }
+            });
+            weatherManager.setOptions(cfg.weatherCity, cfg.weatherUnit);
+        }
         shamsi = cfg.shamsiDate;
         lunarDate = findViewById(R.id.lunarDate);
         lunar = cfg.lunarDate;
@@ -959,6 +982,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             pillsShown = true;
         }
         if (showStats) startStats();
+        if (showWeather && weatherManager != null) {
+            weatherManager.start();
+            if (weatherEffects != null && weatherAnimations) {
+                weatherEffects.start();
+            }
+        }
         sky.update();
         wallpaperPlayer.start();
         handler.postDelayed(minuteTick, MINUTE_MS);
@@ -1136,6 +1165,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         heroArt.animate().cancel();
         handler.removeCallbacks(minuteTick);
         stopStats();
+        if (weatherManager != null) weatherManager.stop();
+        if (weatherEffects != null) weatherEffects.stop();
         if (diya != null) diya.stop();
         cancelPendingFocusScroll();
         // Nothing of ours stays on screen over another app; an undecided prompt simply returns next time.
@@ -1188,6 +1219,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
     @Override
     protected void onDestroy() {
+        if (weatherManager != null) weatherManager.stop();
+        if (weatherEffects != null) weatherEffects.stop();
         super.onDestroy();
         unregisterReceiver(packageReceiver);
         wallpaperPlayer.close();

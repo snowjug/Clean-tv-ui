@@ -31,10 +31,11 @@ Built with lightweight native Java and zero telemetry, it restores instant TV bo
 - Bundled with **14 dark minimalist vector landscape wallpapers**.
 - Automatically rotates hourly in the background without waking or polling services (`wallpaper_rotation_minutes: 60`).
 
-### 🌦️ 3. Live Weather & Air Quality Card
-- Modular weather card integration (`addons/weather`) powered by [Open-Meteo](https://open-meteo.com/).
-- Displays current temperature, feels-like, live conditions, US AQI pill, and 3-day forecast.
-- **Zero background lag**: queries weather only when on screen; zero internet permissions in the core launcher.
+### 🌦️ 3. Native Weather Widget & Micro-Animations
+- **Header Weather Widget**: Positioned directly below the clock and date (`Bengaluru · ☁️ 26°C Overcast · Feels like 26°`).
+- **Automatic IP-Based Geolocation**: Automatically resolves your city coordinates over secure HTTPS without manual configuration or API keys.
+- **Google Weather-Style Micro-Animations**: 60 FPS zero-allocation canvas overlay featuring dynamic rain streaks, gentle drizzle, fluffy drifting snowflakes, and cold wind wisps that match current outdoor conditions.
+- **Battery & Memory Safe**: Pauses immediately when an app or screensaver opens, consuming 0% CPU in the background.
 
 ### ⚡ 4. Safe Mi TV Boot Acceleration & Debloat
 - Tailored debloat profile tested on **Xiaomi Mi TV 4K (`MiTV-AXSO2` / `dangalUHD`)**.

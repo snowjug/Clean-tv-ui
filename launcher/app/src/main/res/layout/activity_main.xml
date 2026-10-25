@@ -12,6 +12,13 @@
         android:layout_height="match_parent"
         android:importantForAccessibility="no" />
 
+    <!-- Weather micro-animations overlay (rain, drizzle, snow, cold wind) -->
+    <com.gathin.tvhome.WeatherEffectsView
+        android:id="@+id/weatherEffects"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no" />
+
     <!-- Cinematic top shelf (cinematic_home): the focused dock app's artwork, a few pixels across and
          stretched over the screen, which softens it like a blur without the cost of one. Hidden otherwise. -->
     <ImageView
@@ -288,6 +295,28 @@
                             android:textAllCaps="true"
                             android:visibility="gone" />
                     </LinearLayout>
+                </LinearLayout>
+
+                <!-- Weather and temperature widget under the clock and day -->
+                <LinearLayout
+                    android:id="@+id/weatherBlock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="4dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/weatherText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textColor="#D9FFFFFF"
+                        android:textSize="13sp"
+                        android:fontFamily="@string/font_regular"
+                        android:letterSpacing="0.04" />
                 </LinearLayout>
 
             </LinearLayout>
