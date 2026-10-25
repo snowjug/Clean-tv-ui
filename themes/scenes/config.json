@@ -1,5 +1,7 @@
 {
   "wallpaper": true,
   "wallpaper_rotation_minutes": 60,
-  "tile_menu": true
+  "tile_menu": true,
+  "settings_key_panel": true,
+  "settings_key_keycodes": [176, 83]
 }
