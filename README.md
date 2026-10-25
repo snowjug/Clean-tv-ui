@@ -51,6 +51,44 @@ developer options, allow your computer once, and the rest is standard Android to
 The bloat differs by brand, so the prompt has your coding assistant discover it on your TV and ask
 before touching anything you might use.
 
+## One-Line Direct Install & Push (Over Wi-Fi)
+
+To build and install the launcher directly onto your Android TV / Google TV and apply the pre-configured **Scenes Theme** (with 14 hourly landscape wallpapers and frosted glass dock):
+
+### Windows (PowerShell)
+```powershell
+$env:TV_HOST="<YOUR_TV_IP>"; .\launcher\build-and-install.ps1; .\tools\theme.ps1 themes\scenes
+```
+
+### macOS / Linux / Bash
+```bash
+TV_HOST=<YOUR_TV_IP> bash -c './launcher/build-and-install.sh && ./tools/theme.sh themes/scenes'
+```
+
+### From Any Machine (Clone & Deploy in one line)
+```powershell
+# Windows PowerShell
+git clone https://github.com/snowjug/Clean-tv-ui.git; cd Clean-tv-ui; python -m venv tools\venv; .\tools\venv\Scripts\pip.exe install -r tools\requirements.txt; .\launcher\build-and-install.ps1 -TvHost <YOUR_TV_IP>; .\tools\theme.ps1 -TvHost <YOUR_TV_IP> themes\scenes
+```
+```bash
+# macOS / Linux / Termux
+git clone https://github.com/snowjug/Clean-tv-ui.git && cd Clean-tv-ui && python3 -m venv tools/venv && tools/venv/bin/pip install -r tools/requirements.txt && TV_HOST=<YOUR_TV_IP> ./launcher/build-and-install.sh && TV_HOST=<YOUR_TV_IP> ./tools/theme.sh themes/scenes
+```
+
+---
+
+## Pre-Configured Features in this Repository
+
+| Feature | Description | Key / Switch |
+|---|---|---|
+| **Scenes Theme** | 14 dark illustrated landscapes in `wallpapers/` rotating automatically every 60 minutes. Drawn in code by `tools/scenes_wallpapers.py`. | `"wallpaper": true`, `"wallpaper_rotation_minutes": 60` |
+| **Apple Glassmorphism Dock** | Translucent frosted-glass dock band with concentric rounded padding, letting wallpaper landscapes shine through. | `"dock_glass": true`, `"dock_even_padding": true` |
+| **Quick Settings Panel** | Remote Settings / Gear button opens a sleek glass quick panel (TV Settings, Display, Network, Apps, Launcher Settings) over any running video without closing it. | `"settings_key_panel": true`, `"settings_key_keycodes": [176, 83]` |
+| **Interactive App Moving** | Hold `OK` (or press `Menu`) on any tile to pick it up, carry it with arrows, and drop it in the dock or top grid rows. | `"tile_menu": true` |
+| **Miracast & Casting** | Wi-Fi Display / SmartShare and Google Chromecast are completely preserved and untouched. | Native system services |
+
+---
+
 ## Quick start
 
 | You have | Do this |
